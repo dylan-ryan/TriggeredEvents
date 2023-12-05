@@ -6,26 +6,36 @@ using UnityEngine.Playables;
 public class FirstTrigger : MonoBehaviour
 {
     public PlayableDirector timeline;
-    // Start is called before the first frame update
+    public GameObject trigger;
+
+    // Use this for initialization
     void Start()
     {
         timeline = GetComponent<PlayableDirector>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    private void OnTriggerEnter(Collider other)
+    //void OnTriggerExit(Collider c)
+    //{
+    //    if (c.gameObject.tag == "Player")
+    //    {
+    //        timeline.Stop();
+    //    }
+    //}
+
+    void OnTriggerEnter(Collider c)
     {
-        if ( other.gameObject.CompareTag("Player"))
+        if (c.gameObject.tag == "Player")
         {
             timeline.Play();
             
-            
-            
+        }
+    }
+    private void OnTriggerExit(Collider c)
+    {
+        if (c.gameObject.tag == "Player")
+        {
+            trigger.SetActive(false);
         }
     }
 }
